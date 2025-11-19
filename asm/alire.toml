@@ -1,0 +1,12 @@
+name = "asm"
+description = "thetachip assembler"
+version = "0.1.0-dev"
+
+authors = ["Matheus Xavier Silva"]
+maintainers = ["Matheus Xavier Silva <mxavier@ccho.eu>"]
+maintainers-logins = ["xadaemon"]
+licenses = "Apache-2.0"
+website = ""
+tags = []
+
+executables = ["asm"]
