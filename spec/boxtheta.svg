@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="3840"
+   height="3840"
+   viewBox="0 0 1016 1016"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   sodipodi:docname="boxtheta.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.17794789"
+     inkscape:cx="1093.0166"
+     inkscape:cy="2230.9902"
+     inkscape:window-width="1920"
+     inkscape:window-height="1022"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g2" />
+  <defs
+     id="defs1" />
+  <g
+     id="g1"
+     transform="matrix(1,0,0,-1,20.462449,192.36732)"
+     inkscape:export-filename="boxtheta.png"
+     inkscape:export-xdpi="653.14294"
+     inkscape:export-ydpi="653.14294">
+    <g
+       id="g2"
+       transform="matrix(24.190476,0,0,24.190476,-1436.5136,-2550.0421)">
+      <rect
+         style="fill:#000000;stroke-width:0.299999"
+         id="rect1"
+         width="42"
+         height="42"
+         x="58.537548"
+         y="71.367317"
+         ry="1.4868586" />
+      <path
+         style="font-size:25.4px;font-family:'JetBrains Mono';-inkscape-font-specification:'JetBrains Mono';fill:#eef0f2;stroke-width:0.264583;fill-opacity:1"
+         d="M 61.884532,104.30531 V 80.429307 h 6.223 v 2.032 h -3.937 v 19.812003 h 3.937 v 2.032 z m 17.653009,-2.54 q -2.4892,0 -3.937,-1.4224 -1.4478,-1.422403 -1.4478,-3.911603 v -8.382 q 0,-2.4892 1.4478,-3.9116 1.4478,-1.4224 3.937,-1.4224 2.4892,0 3.937,1.4224 1.4478,1.397 1.4478,3.8862 v 8.4074 q 0,2.4892 -1.4478,3.911603 -1.4478,1.4224 -3.937,1.4224 z m 0,-2.057403 q 1.4986,0 2.286,-0.8382 0.8128,-0.8636 0.8128,-2.4384 v -8.382 q 0,-1.5748 -0.8128,-2.413 -0.7874,-0.8636 -2.286,-0.8636 -1.4732,0 -2.286,0.8636 -0.8128,0.8382 -0.8128,2.413 v 8.382 q 0,1.5748 0.8128,2.4384 0.8128,0.8382 2.286,0.8382 z m -2.286,-6.4516 v -2.0828 h 4.572 v 2.0828 z m 13.71601,11.049003 v -2.032 h 3.937 V 82.461307 h -3.937 v -2.032 h 6.223 v 23.876003 z"
+         id="text1"
+         aria-label="[Θ]" />
+    </g>
+  </g>
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-5.0000041,-48.499998)" />
+</svg>
