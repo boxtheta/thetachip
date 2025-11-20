@@ -1,0 +1,31 @@
+Entry_Bit_Len = 16
+Prefix_Bits = 3
+
+[Groups.VIOLATION]
+Prefix = 0
+Items = [
+    "IO",
+    "PRIVILEGE",
+    "PAGE",
+]
+
+[Groups.INVALID]
+Prefix = 1
+Items = [
+    "OPCODE",
+    "PTR",
+    "OPERANDS"
+]
+
+[Groups.HW_FAULT]
+Prefix = 2
+Items = [
+    "SELF_CHECK_FAIL"
+]
+
+[Groups.FATAL]
+Prefix = 3
+Items = [
+    "HW_IRRECOVERABLE",
+    "SUPERVISOR_FAULT",
+]

@@ -1,5 +1,6 @@
 #set text(font: "IBM Plex Mono")
 #show raw: set text(font: "Jetbrains Mono", size: 1em)
+#show table: set table(inset: 10pt)
 
 #align(left)[
   *Document*: Specification of the ThetaChip ISA\
@@ -14,7 +15,6 @@
 #table(
   columns: 3,
   align: horizon,
-  inset: 10pt,
   table.header([Author], [Date], [Summary]),
   [Matheus Xavier], [2025-11-19], [Initial specification.]
 )
@@ -71,7 +71,6 @@ The special registers are:
 / r0: always reads 0, writes are ignored but raise no error;
 / jve: jump vector, used by all variants of the jump opcode except `jimm`;
 / pic: program index counter;
-/ sbp: stack base pointer;
 / six: stack index;
 / sts: status register which is a bitfield;
 / non, vrb: noun and verb, see @noun_verb for an explanation;
@@ -82,7 +81,6 @@ a bitfield 64-bit wide, independent of _sw_.
 === Bitmap of the sts register
 #table(
   columns: 4,
-  inset: 10pt,
   table.header([Start],[Span], [Name],[Notes]),
   [0], [8], [CPU_REV_MINOR], [],
   [8], [8], [CPU_REV_MINOR], [],
@@ -117,19 +115,42 @@ marked `PL_K` and lower in the opcode reference, attempting to execute an opcode
 `PL_S` will immediately halt the CPU and assert the `CPU_RST_REQ` signal (*ONLY* in kernel mode).
 
 *Userland* has a linear address space translated by the MMU, any access to an address
-in an unmapped page will result in a `ERR_PAGE_FAULT` error, and control being returned
+in an unmapped page will result in a `ERR_VIOLATION_PAGE` error, and control being returned
 to the kernel mode via iv 1, if userland code attempts to execute any instruction marked
-other than `PL_U` it will result in `ERR_PRIV_VIOLATION` and the kernel getting control
+other than `PL_U` it will result in `ERR_VIOLATION_PRIVILEGE` and the kernel getting control
 via iv 1.
 
 Userland code can make IO operations via DMA requests allowable as per the IOMU configuration
-`ERR_IO_VIOLATION` will be raised like the previously described faults.
+`ERR_VIOLATION_IO` will be raised like the previously described faults.
 
 *Supervisory* has unrestricted access to the system, and can execute any instructions, and
 can access all verb-noun pairs, see @sup_mode for further detail.
 
 == Noun and verb registers<noun_verb>
-These are special registers to 
+These are special registers to interact with the cpu verb noun system, this allows a
+suffieciently privileged ring to read and alter many settings of the cpu, like clock
+dividers and peripherals synthesized with the cpu should include nouns and verbs into
+the processor table to allow interaction, via a standard interface.
+
+#pagebreak()
 
 = Error codes<errors>
+Error codes can be broken up into 3-bit prefixes:
+
+#table(
+  columns: 2,
+  inset: 10pt,
+  table.header([Prefix (0b)], [Name]),
+  [0b000], [VIOLATION],
+  [0b001], [INVALID],
+  [0b010], [HW_FAULT],
+  [0b011], [FATAL],
+  [--], [RESERVED],
+)
+
+A full list of errors is provided in the errors.csv that should accompany
+this document, a copy can be found at *INSERT LINK HERE*.
+
+
+
 = Supervisory mode annex<sup_mode>
