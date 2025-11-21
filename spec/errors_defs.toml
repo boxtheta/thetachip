@@ -1,5 +1,5 @@
 Entry_Bit_Len = 16
-Prefix_Bits = 3
+Prefix_Bits = 4
 
 [Groups.VIOLATION]
 Prefix = 0
@@ -14,7 +14,7 @@ Prefix = 1
 Items = [
     "OPCODE",
     "PTR",
-    "OPERANDS"
+    "OPERANDS",
 ]
 
 [Groups.HW_FAULT]

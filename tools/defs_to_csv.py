@@ -1,4 +1,5 @@
 import csv
+
 import tomlkit
 
 
@@ -18,10 +19,9 @@ def main(def_file: str, out_file: str) -> None:
             e_code = base_mask | i
             items.append(("0x{:04X}".format(e_code), f"{name}_{error}"))
     with open(out_file, "w+", encoding="utf-8") as f:
-        cw = csv.writer(f, dialect= "excel")
+        cw = csv.writer(f, dialect="excel")
         cw.writerows(items)
     print(items)
-
 
 
 if __name__ == "__main__":
