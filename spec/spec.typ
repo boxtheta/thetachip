@@ -12,12 +12,14 @@
 
 #set page(numbering: "I")
 #counter(page).update(1)
+#let version = "2025-11-25-draft"
 = Revision history
 
 #table(
   columns: 3,
   table.header([Author], [Date], [Summary]),
-  [Matheus Xavier], [2025-11-19], [Initial specification.]
+  [Matheus Xavier], [2025-11-19], [Initial specification.],
+  [Matheus Xavier], [2025-11-25], [Include instruction format section.],
 )
 
 #line(length: 100%, end: none)
@@ -31,7 +33,7 @@
 #pagebreak()
 #set page(footer: context
 [
-  #align(right)[#sym.copyright #datetime.today().year() BoxTheta, all rights reserved. -- #counter(page).display()]
+  #align(right)[#sym.copyright #datetime.today().year() BoxTheta, all rights reserved. -- #counter(page).display(), #version]
 ]
 )
 
@@ -64,7 +66,7 @@ design, it is intended to be flexible and is parametrized for 32 or 64 bit.
 The cpu has distinct types of registers a listing of these types and their respective registers is provided bellow.
 
 == General purpose registers
-The cpu provides 32 general purpose registers named `r1` to `r32`, all general purpose
+The cpu provides 31 general purpose registers named `r1` to `r31`, all general purpose
 registers are _sw_ wide.
 
 === Double wide registers
@@ -168,44 +170,30 @@ caption: [Error type tags])<error_tags>
 A full list of errors is provided in the errors.csv that should accompany
 this document, a copy can be found at @errors_list.
 
-= Supervisory mode annex<sup_mode>
 
 = Instructions<instructions>
-Instructions are variable width, up to 32 bytes wide, the following section
-describes the construction of an instruction.
-
-== Instruction format
-
+Intructions are with the exception of immediate loads always 32-bit wide made up of 3 fields:
 #figure(
-  box(inset: 10pt, stroke: black)[
-    The simplest form of any instruction other than the no-op instruction is as follows:
-    #table(
-      inset: 5pt,
-      columns: 4,
-      [5-bit + lit. `0b1`], [10-bit], [16-bit],[$op("size")$ bytes],
-      [size], [class], [op], [literal],
-    )
-    This form thus gives a total of $2^26$ possible opcodes.\
-    *NOTE*: Instructions are always an even number of bytes wide.
-  ],
-  caption: [instruction bitmap outline]
+  table(
+    columns: 3,
+    [20-bit], [6-bit], [6-bit],
+    [opcode], [reg A], [reg B]
+  ),
+  caption: [Instruction format]
 )
 
-For immediate values, assemblers are encouraged to set the size field to $op("round_even")(ceil(log_2 (n)))$\
+Immediate load instructions follow the same layout, plus 4, 8 or 64 bytes, this allows for
+the pipeline to be a slotted design, where each slot is 32-bit wide, and the longest
+instruction possible would be 17 slots wide (512-bit immediate).
 
-Ex, a 32-bit immediate load would consist of:\
-4 byte size, bit and
-```ada
-size := ceil(log(2,n));
-if size mod 2 /= 0 then
-    size := size + 1;
-end;
-```
 
 #pagebreak()
 
 #metadata(())<back_matter>
 #set page(numbering: "I")
+#set heading(numbering: "I.A.a")
+= Supervisory mode annex<sup_mode>
+#pagebreak()
 = Errors code full table<errors_list>
 #let errors_table = csv("errors.csv")
 
