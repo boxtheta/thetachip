@@ -1,0 +1,4 @@
+[Design.Facts]
+N_Registers = 64
+Width_Registers = 64
+Max_Comp_Reg_Len = 8

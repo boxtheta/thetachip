@@ -1,4 +1,5 @@
 #set text(font: "IBM Plex Mono")
+#set page(paper: "a4")
 #show raw: set text(font: "Jetbrains Mono", size: 1em)
 #show table: set table(inset: 10pt)
 
@@ -37,6 +38,10 @@
 ]
 )
 
+// ------------
+// Content
+// ------------
+
 #set page(numbering: "1")
 #counter(page).update(1)
 = General description
@@ -45,13 +50,8 @@ The ThetaChip is a general purpose RISC
 #link("https://en.wikipedia.org/wiki/Von_Neumann_architecture",
 [Von Neumann architecture]
 )
-design, it is intended to be flexible and is parametrized for 32 or 64 bit.
-
-#box(inset: 10pt, stroke: black)[
-  Note: This document refers to the chosen width as synthesis width or _sw_ for short,
-  where _sw_ appears replace with your chosen width, in formulas it will be shown as
-  $W_s$.
-]
+design, it is intended to be flexible and is 64 bit wide but allows for easy use of 128-bit values using the combined registers
+techniques described further along in this document.
 
 #box(inset: 10pt, stroke: black)[
   Bitfields are specified in a `start + (span - 1)` form, i.e
@@ -66,16 +66,19 @@ design, it is intended to be flexible and is parametrized for 32 or 64 bit.
 The cpu has distinct types of registers a listing of these types and their respective registers is provided bellow.
 
 == General purpose registers
-The cpu provides 31 general purpose registers named `r1` to `r31`, all general purpose
-registers are _sw_ wide.
+The cpu provides 63 general purpose registers named `r1` to `r63`, all general purpose
+registers are 64-bit wide. `r0` is a special register described in @special_regs.
 
-=== Double wide registers
-These are registers that work by combining two of the general purpose registers into 4 registers that are _sw_\*2 wide,
-thus `rd1` is made up of `r24` and `r25`, `rd2` is `r26` and `r27` and so on. These registers are only valid as parameters to
-`DWO` tagged instructions as described in @instructions trying to use a `rd_` register with a normal instruction will raise
-`ERR_INVALID_OPRANDS`.
+=== Combination registers<combination_regs>
+Combination registers are *fixed* combinations of the high 32 of the 63 general purpose registers and are organized as follows,
 
+- 16 double wide (128-bit) `rd_0` to `rd_15`
+- 8 quad wide (256-bit) `rq_0` to `rq_7`
+- 4 oct wide (512-bit) `ro_0` to `ro_3`
+- 2 hexa wide (1024-bit) `rh_0` and `rh_1`
 
+The `oct` and `hexa` are optional and the flag `CPU_COMBO_REGS_EXT` in the `sts` register allows to verify
+if support for the feature was synthesized.
 
 == Special registers<special_regs>
 The special registers are:
@@ -86,8 +89,8 @@ The special registers are:
 / sts: status register which is a bitfield;
 / non, vrb: noun and verb, see @noun_verb for an explanation;
 
-All special registers are _sw_ wide except the `sts` register as it is
-a bitfield 64-bit wide, independent of _sw_.
+All special registers are 64-bit wide, except for the `non` and `vrb` registers, they correspond to
+the lower and upper half respectively of an internal 32-bit register, and are thus 16-bit wide each.
 
 === Bitmap of the sts register
 #figure(
@@ -98,7 +101,7 @@ table(
   [8], [8], [CPU_REV_MINOR], [],
   [16], [16], [ERR_CODE], [See @errors],
   [32], [2], [PRIV_LVL], [See @priv_levels],
-  [34], [1], [CPU_SW], [Synthesized width (32, 64)],
+  [34], [1], [CPU_COMBO_REGS_EXT], [See @combination_regs],
   [35], [1], [ALU_CMP_RES], [Compare result],
   [36], [1], [ALU_OVERFLOW], [Overflow],
   [--], [63], [--], [_Unspecified bits are_ *Reserved*]
@@ -144,10 +147,18 @@ Userland code can make IO operations via DMA requests allowable as per the IOMU 
 can access all verb-noun pairs, see @sup_mode for further detail.
 
 == Noun and verb registers<noun_verb>
-These are special registers to interact with the cpu verb noun system, this allows a
-sufficiency privileged ring to read and alter many settings of the cpu, like clock
-dividers and peripherals synthesized with the cpu should include nouns and verbs into
-the processor table to allow interaction, via a standard interface.
+This system allows the baking at synthesis time of extra information in the form of 64-bit values,
+addressed in a `row x column` form such as cpu vendor information, an annex shall be provided with
+the required noun and verbs.
+
+A sample assembly program to retrieve the cpu vendor string:
+```asm
+mov r0, r1; load 0 into r1
+mov r1, non; load the lower 16-bits of r1 into non
+mov #0x1, r1; load the immediate 1 into r1
+mov r1, vrb; same as line 2 but for vrb
+rdnv; reads the noun and verb, clobbers r62 and r64 with the null terminated string
+```
 
 #pagebreak()
 
@@ -188,6 +199,10 @@ instruction possible would be 17 slots wide (512-bit immediate).
 
 
 #pagebreak()
+
+// ------------
+// Back matter
+// ------------
 
 #metadata(())<back_matter>
 #set page(numbering: "I")

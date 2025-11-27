@@ -1,0 +1,20 @@
+[Meta]
+Type = "opcodes"
+Entry_Bit_Len = 32
+Prefix_Bits = 4
+Variable = 6
+
+[Groups.Mov]
+Prefix = 0
+Items = [
+{Name = "mov", Desc = "Move a register to another"},
+{Name = "movl", Desc = "Move the lower 32 bits of a register"},
+{Name = "movh", Desc = "Move the higher 32 bits of a register"},
+{Name = "movls", Desc = "Move the lower 16 bits of a register's lower half"},
+{Name = "movhs", Desc = "Move the higher 16 bits of a register's lower half"},
+{Name = "movlb", Desc = "Move the lower byte of a register's lower half"},
+{Name = "movhb", Desc = "Move the higher byte of a register's lower half"},
+{Name = "immh", Desc = "Move an immediate 32-bit value to a register, with an optional left shift"},
+{Name = "immw", Desc = "Move an immediate 64-bit value to a register"},
+{Name = "imml", Desc = "Move an immediate 128-bit value to a combined register"},
+]
