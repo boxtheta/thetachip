@@ -7,8 +7,7 @@
 
 #align(left)[
   *Document*: Specification of the ThetaChip ISA\
-  *Last update*: #datetime.today().display()\
-  #image("boxtheta.svg", format: "svg", )
+  *Last update*: #datetime.today().display()
 ]
 
 #pagebreak()
@@ -35,7 +34,8 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0\
+    or reproduced in full at @license_full
 
 
 #metadata(())<front_matter>
@@ -230,3 +230,15 @@ instruction possible would be 17 slots wide (512-bit immediate).
   table.header([Error code (HEX)],[Symbol]),
   ..errors_table.flatten(),
 )
+
+= Opcode reference table<opcode_list>
+#let opcodes_table = csv("opcodes.csv")
+
+#table(
+  columns: 4,
+  table.header([opcode (HEX)], [Category], [Name], [Description]),
+  ..opcodes_table.flatten()
+)
+
+= Full license text<license_full>
+#text(10pt)[#include "LICENSE.APACHE"]

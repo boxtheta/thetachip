@@ -1,0 +1,31 @@
+0x00000000,Special,nop,No op
+0x00001000,Mov,mov,Move a register to another
+0x00002000,Mov,movl,Move the lower 32 bits of a register
+0x00003000,Mov,movh,Move the higher 32 bits of a register
+0x00004000,Mov,movls,Move the lower 16 bits of a register's lower half
+0x00005000,Mov,movhs,Move the higher 16 bits of a register's lower half
+0x00006000,Mov,movlb,Move the lower byte of a register's lower half
+0x00007000,Mov,movhb,Move the higher byte of a register's lower half
+0x00008000,Mov,immh,"Move an immediate 32-bit value to a register, with an optional left shift"
+0x00009000,Mov,immw,Move an immediate 64-bit value to a register
+0x0000A000,Mov,imml,Move an immediate 128-bit value to a combined register
+0x1000B000,Logic_And_Maths,add,Add two registers
+0x1000C000,Logic_And_Maths,sub,Subtract two registers
+0x1000D000,Logic_And_Maths,mul,Multiply two registers
+0x1000E000,Logic_And_Maths,div,Divide two registers
+0x1000F000,Logic_And_Maths,and,Bitwise AND two registers
+0x10010000,Logic_And_Maths,or,Bitwise OR two registers
+0x10011000,Logic_And_Maths,xor,Bitwise XOR two registers
+0x10012000,Logic_And_Maths,shl,Shift left two registers
+0x10013000,Logic_And_Maths,shr,Shift right two registers
+0x10014000,Logic_And_Maths,not,Bitwise NOT a register
+0x10015000,Logic_And_Maths,inc,Increment a register
+0x10016000,Logic_And_Maths,dec,Decrement a register
+0x10017000,Logic_And_Maths,push,Push a register onto the stack
+0x10018000,Logic_And_Maths,pop,Pop a register from the stack
+0x20019000,Flow_Control,jmp,Jump to an address unconditionally
+0x2001A000,Flow_Control,sub,Jump to a function and push the return address to the stack
+0x2001B000,Flow_Control,ret,Pop the return address from the stack and jump
+0x2001C000,Flow_Control,tst,Test the register with one of `eq` | `ne` | `lt` | `gt` | `lte` | `gte`
+0x2001D000,Flow_Control,jif,Jump if the condition flag is set
+0x2001E000,Flow_Control,jni,Jump if the condition flag is not set

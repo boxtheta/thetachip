@@ -1,20 +1,56 @@
+# SPDX-License-Identifier: Apache-2.0
+
 [Meta]
 Type = "opcodes"
 Entry_Bit_Len = 32
 Prefix_Bits = 4
-Variable = 6
+Variable = 12
+
+[Groups.Special]
+Prefix = 0
+Items = [{Name = "nop",  Desc = "No op"}]
 
 [Groups.Mov]
 Prefix = 0
 Items = [
-{Name = "mov", Desc = "Move a register to another"},
-{Name = "movl", Desc = "Move the lower 32 bits of a register"},
-{Name = "movh", Desc = "Move the higher 32 bits of a register"},
-{Name = "movls", Desc = "Move the lower 16 bits of a register's lower half"},
-{Name = "movhs", Desc = "Move the higher 16 bits of a register's lower half"},
-{Name = "movlb", Desc = "Move the lower byte of a register's lower half"},
-{Name = "movhb", Desc = "Move the higher byte of a register's lower half"},
-{Name = "immh", Desc = "Move an immediate 32-bit value to a register, with an optional left shift"},
-{Name = "immw", Desc = "Move an immediate 64-bit value to a register"},
-{Name = "imml", Desc = "Move an immediate 128-bit value to a combined register"},
+  {Name = "mov", Desc = "Move a register to another"},
+  {Name = "movl", Desc = "Move the lower 32 bits of a register"},
+  {Name = "movh", Desc = "Move the higher 32 bits of a register"},
+  {Name = "movls", Desc = "Move the lower 16 bits of a register's lower half"},
+  {Name = "movhs", Desc = "Move the higher 16 bits of a register's lower half"},
+  {Name = "movlb", Desc = "Move the lower byte of a register's lower half"},
+  {Name = "movhb", Desc = "Move the higher byte of a register's lower half"},
+  {Name = "immh", Desc = "Move an immediate 32-bit value to a register, with an optional left shift"},
+  {Name = "immw", Desc = "Move an immediate 64-bit value to a register"},
+  {Name = "imml", Desc = "Move an immediate 128-bit value to a combined register"},
+]
+
+[Groups.Logic_And_Maths]
+Prefix = 1
+Items = [
+  {Name = "add", Desc = "Add two registers"},
+  {Name = "sub", Desc = "Subtract two registers"},
+  {Name = "mul", Desc = "Multiply two registers"},
+  {Name = "div", Desc = "Divide two registers"},
+  {Name = "and", Desc = "Bitwise AND two registers"},
+  {Name = "or", Desc = "Bitwise OR two registers"},
+  {Name = "xor", Desc = "Bitwise XOR two registers"},
+  {Name = "shl", Desc = "Shift left two registers"},
+  {Name = "shr", Desc = "Shift right two registers"},
+  {Name = "not", Desc = "Bitwise NOT a register"},
+  {Name = "inc", Desc = "Increment a register"},
+  {Name = "dec", Desc = "Decrement a register"},
+  {Name = "push", Desc = "Push a register onto the stack"},
+  {Name = "pop", Desc = "Pop a register from the stack"},
+]
+
+[Groups.Flow_Control]
+Prefix = 2
+Items = [
+  {Name = "jmp", Desc = "Jump to an address unconditionally"},
+  {Name = "sub", Desc = "Jump to a function and push the return address to the stack"},
+  {Name = "ret", Desc = "Pop the return address from the stack and jump"},
+  {Name = "tst", Desc = "Test the register with one of `eq` | `ne` | `lt` | `gt` | `lte` | `gte`"},
+  {Name = "jif", Desc = "Jump if the condition flag is set"},
+  {Name = "jni", Desc = "Jump if the condition flag is not set"}
 ]

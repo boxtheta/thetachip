@@ -1,5 +1,8 @@
 # Why?
-See the spec document for the details
+See the spec document for the details.
+
+# Generating a pdf of the spec
+You can use the typst compiler to generate a pdf from the [spec](spec/spec.typ) file.
 
 # License
 The supporting code and reference HDL in this repository are under a GPL-3 license.

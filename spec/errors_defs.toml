@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 [Meta]
 Type = "consts"
 Entry_Bit_Len = 16
