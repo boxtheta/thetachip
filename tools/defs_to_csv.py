@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3
+
 import csv
 from enum import StrEnum
 from typing import Any, Literal, Type

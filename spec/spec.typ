@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 #set text(font: "IBM Plex Mono")
 #set page(paper: "a4")
 #show raw: set text(font: "Jetbrains Mono", size: 1em)
@@ -21,9 +23,20 @@
   table.header([Author], [Date], [Summary]),
   [Matheus Xavier], [2025-11-19], [Initial specification.],
   [Matheus Xavier], [2025-11-25], [Include instruction format section.],
+  [Matheus Xavier], [2025-11-27], [Clarify licensing terms],
 )
 
 #line(length: 100%, end: none)
+
+= License
+Copyright #datetime.today().year() BoxTheta
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
 
 #metadata(())<front_matter>
 
@@ -34,7 +47,7 @@
 #pagebreak()
 #set page(footer: context
 [
-  #align(right)[#sym.copyright #datetime.today().year() BoxTheta, all rights reserved. -- #counter(page).display(), #version]
+  #align(right)[#sym.copyright #datetime.today().year() BoxTheta -- #counter(page).display(), #version]
 ]
 )
 
